@@ -1,0 +1,442 @@
+﻿<Page x:Class="VacationPlus.Windows.AdminWindow.Pages.ListsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="ListsPage">
+    <Page.Resources>
+        <Style x:Key="TabControlStyle" TargetType="TabControl">
+            <Setter Property="Background" Value="#8E8D8E"></Setter>
+        </Style>
+        <Style x:Key="TabItemStyle" TargetType="TabItem">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Verdana"></Setter>
+                <Setter Property="Foreground" Value="#FF4D4D4D"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <Grid Margin="1">
+                                <Border Name="Border" Margin="0,0,-4,0" BorderThickness="2, 0, 2, 0" BorderBrush="#FFF45C00">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="#FFF45C00"></Setter>
+                                    <Setter Property="Foreground" Value="White"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Foreground" Value="#FF4D4D4D"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <StackPanel Name="StackPanel">
+                            <GridViewRowPresenter Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}"/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="StackPanel" Property="Background" Value="#FFF45C00"></Setter>
+                                <Setter Property="Foreground" Value="White"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ListViewStyle" TargetType="ListView">
+            <Style.Setters>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+                <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="ItemContainerStyle" Value="{StaticResource ListViewItemStyle}"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListView">
+                            <Border Background="#8E8D8E" BorderBrush="#FF5F5F5F" BorderThickness="3">
+                                <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="GridViewColumnHeaderGripper" TargetType="Thumb">
+            <Setter Property="Width" Value="18"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Padding="{TemplateBinding Padding}" Background="Transparent">
+                            <Rectangle HorizontalAlignment="Center" Width="1" Fill="{TemplateBinding Background}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="GridViewColumnHeader">
+            <Style.Setters>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="#FF4D4D4D"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Grid>
+                                <Border Name="HeaderBorder" BorderThickness="0,1,0,1" Padding="2,0,2,0">
+                                    <ContentPresenter Name="HeaderContent" Margin="0,0,0,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                                <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0,0,-9,0" Style="{StaticResource GridViewColumnHeaderGripper}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="Label">
+            <Style.Setters>
+                <Setter Property="Foreground" Value="#FFF45C00"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="BoxStyle" TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="FontFamily" Value="Verdana"></Setter>
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="Foreground" Value="Gray"></Setter>
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border Name="Border" BorderBrush="Gray" BorderThickness="3" Background="WhiteSmoke" SnapsToDevicePixels="true">
+                                <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter Property="Background" TargetName="Border" Value="White"></Setter>
+                                    <Setter Property="Foreground" Value="#F45C00"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Verdana"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Foreground" Value="#873300"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" CornerRadius="5" BorderBrush="#B44400" BorderThickness="1" Background="#FB5F00" Padding="15">
+                            <ContentPresenter HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FFE05500"></Setter>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FF803000"></Setter>
+                                <Setter Property="Foreground" Value="#FF6C2900"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="True" />
+        </ControlTemplate>
+        <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="32"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="Border" Grid.ColumnSpan="2" Background="{TemplateBinding Background}"/>
+                            <Border Grid.Column="0" Background="LightGray" BorderBrush="Transparent"/>
+                            <Path x:Name="Arrow" Grid.Column="1" Fill="{TemplateBinding Foreground}" Stroke="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 8 12 L 16 0 Z"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
+                                <Setter Property="Foreground" Value="Gray"/>
+                                <Setter TargetName="Arrow" Property="Fill" Value="Gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border Name="Border" Padding="5" Margin="2" BorderThickness="2" Background="LightGray" BorderBrush="Transparent">
+                            <TextBlock TextAlignment="Center">
+                                <ContentPresenter/>
+                            </TextBlock>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#FFF45C00"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="BorderBrush" Value="#FF4D4D4D" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Style="{StaticResource ComboBoxToggleButton}" Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="10,3,30,3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="PART_EditableTextBox" Style="{x:Null}" Template="{StaticResource ComboBoxTextBox}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,3,23,3" Focusable="True" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="Transparent" BorderThickness="3, 0, 0, 0" BorderBrush="Gray"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="0"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable" Value="true">
+                                <Setter Property="IsTabStop" Value="false"/>
+                                <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="1" Style="{StaticResource TabControlStyle}">
+            <TabItem Header="Сотрудники" Style="{StaticResource TabItemStyle}">
+                <ListView x:Name="EmpList" Style="{StaticResource ListViewStyle}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=id}"></GridViewColumn>
+                                <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding Path=fullName}"></GridViewColumn>
+                                <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=address}"></GridViewColumn>
+                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=email}"></GridViewColumn>
+                                <GridViewColumn Header="Phone Number" DisplayMemberBinding="{Binding Path=phoneNumber}" ></GridViewColumn>
+                                <GridViewColumn Header="Department" DisplayMemberBinding="{Binding Path=deptName}"></GridViewColumn>
+                                <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Path=countryName}"></GridViewColumn>
+                                <GridViewColumn Header="City" DisplayMemberBinding="{Binding Path=cityName}"></GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Header="Отделы" Style="{StaticResource TabItemStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Column="0" x:Name="DeptList" Style="{StaticResource ListViewStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=id}"></GridViewColumn>
+                                    <GridViewColumn Header="Department Name" DisplayMemberBinding="{Binding Path=name}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Column="1" DataContext="{Binding ElementName=DeptList, Path=SelectedItem}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"></RowDefinition>
+                            <RowDefinition Height="150"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Наименование"></Label>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="rDeptNameBox" Text="{Binding Path=name, Mode=Default}" Style="{StaticResource BoxStyle}" Width="290" Height="40"></TextBox>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Описание"></Label>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="rDeptDescriptionBox" Text="{Binding Path=description, Mode=Default}" Style="{StaticResource BoxStyle}" Width="290" Height="130" TextWrapping="Wrap"></TextBox>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Button Content="Изменить" x:Name="ChangeDeptButton" Click="ChangeDeptButton_Click" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"></Button>
+                            <Button Content="Добавить новый отдел" x:Name="AddNewDeptButton" Click="AddNewDeptButton_Click" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"></Button>
+                            <Button Content="Удалить выбранный" x:Name="DeleteDeptButton" Click="DeleteDeptButton_Click" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Города" Style="{StaticResource TabItemStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Column="0" x:Name="CityList" Style="{StaticResource ListViewStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=id}"></GridViewColumn>
+                                    <GridViewColumn Header="City Name" DisplayMemberBinding="{Binding Path=name}"></GridViewColumn>
+                                    <GridViewColumn Header="Country Name" DisplayMemberBinding="{Binding Path=countryName}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Column="1" DataContext="{Binding ElementName=CityList, Path=SelectedItem}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"></RowDefinition>
+                            <RowDefinition Height="145"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Наименование"></Label>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="rCityNameBox" Text="{Binding Path=name, Mode=Default}" Style="{StaticResource BoxStyle}" Width="290" Height="40"></TextBox>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Описание"></Label>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="rCityDescriptionBox" Text="{Binding Path=description, Mode=Default}" Style="{StaticResource BoxStyle}" Width="290" Height="140" TextWrapping="Wrap"></TextBox>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Страна"></Label>
+                        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="CountryForCityComboBox" Width="285">
+                        </ComboBox>
+                        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0, 10, 0, 0">
+                            <Button Content="Изменить" x:Name="ChangeCityButton" Click="ChangeCityButton_Click" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"></Button>
+                            <Button Content="Добавить новый город" x:Name="AddNewCityButton" Click="AddNewCityButton_Click" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"></Button>
+                            <Button Content="Удалить выбранный" x:Name="DeleteCityButton" Click="DeleteCityButton_Click" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Страны" Style="{StaticResource TabItemStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Column="0" x:Name="CountryList" Style="{StaticResource ListViewStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=id}"></GridViewColumn>
+                                    <GridViewColumn Header="Country Name" DisplayMemberBinding="{Binding Path=name}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Column="1" DataContext="{Binding ElementName=CountryList, Path=SelectedItem}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="150"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="Наименование"></Label>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="rCountryNameBox" Text="{Binding Path=name, Mode=Default}" Style="{StaticResource BoxStyle}" Width="290" Height="40"></TextBox>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Описание"></Label>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="rCountryDescriptionBox" Text="{Binding Path=description, Mode=Default}" Style="{StaticResource BoxStyle}" Width="290" Height="140" TextWrapping="Wrap"></TextBox>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Button Content="Изменить" x:Name="ChangeCountryButton" Click="ChangeCountryButton_Click" Style="{StaticResource ButtonStyle}"></Button>
+                            <Button Content="Добавить новую страну" x:Name="AddNewCountryButton" Click="AddNewCountryButton_Click" Style="{StaticResource ButtonStyle}" Width="210"></Button>
+                            <Button Content="Удалить выбранную" x:Name="DeleteCountryButton" Click="DeleteCountryButton_Click" Style="{StaticResource ButtonStyle}"></Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Запросы" Style="{StaticResource TabItemStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <ListView Grid.Column="0" x:Name="ReqList" Style="{StaticResource ListViewStyle}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=id}"></GridViewColumn>
+                                    <GridViewColumn Header="От кого" DisplayMemberBinding="{Binding Path=fromName}"></GridViewColumn>
+                                    <GridViewColumn Header="Статус" DisplayMemberBinding="{Binding Path=statusName}"></GridViewColumn>
+                                    <GridViewColumn Header="Тип" DisplayMemberBinding="{Binding Path=typeName}"></GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Grid Grid.Column="1" DataContext="{Binding ElementName=CountryList, Path=SelectedItem}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"></RowDefinition>
+                            <RowDefinition Height="250"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Style="{StaticResource BoxStyle}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" IsReadOnly="True" Text="{Binding Path=message}"></TextBox>
+                        <Button Style="{StaticResource ButtonStyle}" Content="Удалить выбранный" Grid.Row="2" x:Name="DeleteRequest" Click="DeleteRequest_Click"></Button>
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

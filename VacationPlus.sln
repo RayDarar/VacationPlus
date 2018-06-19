@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VP", "VacationPlus\VP.csproj", "{B4A1EFA6-89A8-4B37-867C-2BE48CE207A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VP.BAL", "VP.BAL\VP.BAL.csproj", "{A37DC58C-DE39-45EC-8D77-9139728C1A5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VP.DAL", "VP.DAL\VP.DAL.csproj", "{CE98E8DC-A456-4F3F-816F-F7B8EB1018CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4A1EFA6-89A8-4B37-867C-2BE48CE207A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A1EFA6-89A8-4B37-867C-2BE48CE207A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A1EFA6-89A8-4B37-867C-2BE48CE207A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A1EFA6-89A8-4B37-867C-2BE48CE207A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37DC58C-DE39-45EC-8D77-9139728C1A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37DC58C-DE39-45EC-8D77-9139728C1A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37DC58C-DE39-45EC-8D77-9139728C1A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37DC58C-DE39-45EC-8D77-9139728C1A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE98E8DC-A456-4F3F-816F-F7B8EB1018CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE98E8DC-A456-4F3F-816F-F7B8EB1018CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE98E8DC-A456-4F3F-816F-F7B8EB1018CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE98E8DC-A456-4F3F-816F-F7B8EB1018CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {509A32DA-334A-47F9-AD64-4422A9541A42}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://raydarar.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = VacationPlus\\VP.csproj
+		SccProjectName1 = VacationPlus
+		SccLocalPath1 = VacationPlus
+		SccProjectUniqueName2 = VP.BAL\\VP.BAL.csproj
+		SccProjectName2 = VP.BAL
+		SccLocalPath2 = VP.BAL
+		SccProjectUniqueName3 = VP.DAL\\VP.DAL.csproj
+		SccProjectName3 = VP.DAL
+		SccLocalPath3 = VP.DAL
+	EndGlobalSection
+EndGlobal
