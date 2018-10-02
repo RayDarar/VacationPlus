@@ -32,7 +32,7 @@ namespace VP.BAL
                         AdminOrEmpOrFired = 0;
                         return true;
                     }
-                    else
+                    else 
                     {
                         AdminOrEmpOrFired = 2;
                         return true;

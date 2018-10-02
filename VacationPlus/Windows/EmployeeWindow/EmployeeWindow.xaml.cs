@@ -8,9 +8,6 @@ using VP.BAL.LogicModules;
 
 namespace VacationPlus.Windows.EmployeeWindow
 {
-    /// <summary>
-    /// Interaction logic for EmployeeWindow.xaml
-    /// </summary>
     public partial class EmployeeWindow : Window
     {
         DispatcherTimer timer;
@@ -35,7 +32,7 @@ namespace VacationPlus.Windows.EmployeeWindow
                 MainWindow mw = new MainWindow();
                 StaticData.ResetAllData();
                 mw.Show();
-                this.Close();
+                Close();
             }
         }
 
@@ -51,7 +48,7 @@ namespace VacationPlus.Windows.EmployeeWindow
                 MainWindow mw = new MainWindow();
                 StaticData.ResetAllData();
                 mw.Show();
-                this.Close();
+                Close();
                 timer.Stop();
             }
             else
@@ -60,7 +57,7 @@ namespace VacationPlus.Windows.EmployeeWindow
         private void AppExit_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Выйти из приложения?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                this.Close();
+                Close();
             else
                 return;
         }
