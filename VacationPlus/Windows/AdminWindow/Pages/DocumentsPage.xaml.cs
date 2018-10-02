@@ -5,9 +5,6 @@ using System.Windows.Documents;
 
 namespace VacationPlus.Windows.AdminWindow.Pages
 {
-    /// <summary>
-    /// Interaction logic for DocumentsPage.xaml
-    /// </summary>
     public partial class DocumentsPage : Page
     {
         public DocumentsPage()

@@ -2,6 +2,7 @@
 using System.Linq;
 using VP.BAL.Classes;
 using VP.DAL.Model;
+
 namespace VP.BAL
 {
     public class MainWindowLogic

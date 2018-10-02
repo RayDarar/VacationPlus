@@ -2,11 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using VP.BAL.Classes;
+
 namespace VacationPlus.Windows.AdminWindow.Pages
 {
-    /// <summary>
-    /// Interaction logic for EmpControlPage.xaml
-    /// </summary>
     public partial class EmpControlPage : Page
     {
         public EmpControlPage()

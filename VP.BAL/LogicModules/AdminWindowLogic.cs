@@ -439,13 +439,11 @@ namespace VP.BAL
             fw.Blocks.Add(textpr2);
             fw.Blocks.Add(textpr3);
             var content = new TextRange(fw.ContentStart, fw.ContentEnd);
+
             if (content.CanSave(DataFormats.Rtf))
-            {
                 using (FileStream stream = new FileStream(currentPath + $@"\VacationPlus\VacationPlus\Documents\Fire\{emp.id}_{emp.fullName}.rtf", FileMode.CreateNew, FileAccess.Write))
-                {
-                    content.Save(stream, DataFormats.Rtf);
-                }
-            }
+                { content.Save(stream, DataFormats.Rtf); }
+
             if (File.Exists(currentPath + $@"\VacationPlus\VacationPlus\Documents\Hire\{emp.id}_{emp.fullName}.rtf"))
                 File.Delete(currentPath + $@"\VacationPlus\VacationPlus\Documents\Hire\{emp.id}_{emp.fullName}.rtf");
         }
@@ -466,12 +464,8 @@ namespace VP.BAL
             fw.Blocks.Add(textpr2);
             var content = new TextRange(fw.ContentStart, fw.ContentEnd);
             if (content.CanSave(DataFormats.Rtf))
-            {
                 using (FileStream stream = new FileStream(currentPath + $@"\{emp.id}_{emp.fullName}.rtf", FileMode.CreateNew, FileAccess.Write))
-                {
-                    content.Save(stream, DataFormats.Rtf);
-                }
-            }
+                { content.Save(stream, DataFormats.Rtf); }
         }
 
         public bool ChecknSentLoginMessage(string Login, string Message, string Title)

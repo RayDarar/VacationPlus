@@ -5,9 +5,6 @@ using System.Windows.Threading;
 
 namespace VacationPlus.Windows.AdminWindow.Pages
 {
-    /// <summary>
-    /// Interaction logic for RequestsMessagesPage.xaml
-    /// </summary>
     public partial class RequestsMessagesPage : Page
     {
         DispatcherTimer timer;

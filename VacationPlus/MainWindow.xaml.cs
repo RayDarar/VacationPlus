@@ -4,9 +4,6 @@ using VP.BAL;
 
 namespace VacationPlus
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         MainWindowLogic logic = new MainWindowLogic();
@@ -29,13 +26,13 @@ namespace VacationPlus
                         adminWindow.Show();
                         this.Close();
                     }
-                    else if(logic.GetAdminOrEmpOrFiredEmp() == 2)
+                    else if (logic.GetAdminOrEmpOrFiredEmp() == 2)
                     {
                         Windows.EmployeeWindow.EmployeeWindow employeeWindow = new Windows.EmployeeWindow.EmployeeWindow();
                         employeeWindow.Show();
                         this.Close();
                     }
-                    else if(logic.GetAdminOrEmpOrFiredEmp() == 1)
+                    else if (logic.GetAdminOrEmpOrFiredEmp() == 1)
                         MessageBox.Show($"Вы были уволены!\nПисьмо от администратора:{logic.Message}");
                     else if (logic.GetAdminOrEmpOrFiredEmp() == 0)
                         MessageBox.Show($"Вы на отпуске!\nПриятного отдыха");

@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace VacationPlus.Windows.AdminWindow.Pages
 {
-    /// <summary>
-    /// Interaction logic for AdminSettingsPage.xaml
-    /// </summary>
     public partial class AdminSettingsPage : Page
     {
         public AdminSettingsPage()

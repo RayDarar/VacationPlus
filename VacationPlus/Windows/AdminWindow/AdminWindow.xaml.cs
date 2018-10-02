@@ -7,20 +7,19 @@ using VP.BAL.Classes;
 
 namespace VacationPlus.Windows.AdminWindow
 {
-    /// <summary>
-    /// Interaction logic for AdminWindow.xaml
-    /// </summary>
     public partial class AdminWindow : Window
     {
         public static Label WLabel;
         public static Label SLabel;
         public static AdminWindowLogic logic = new AdminWindowLogic();
+
         public AdminWindow()
         {
             InitializeComponent();
             WLabel = WelcomeLabel;
             SLabel = SettingsLabel;
         }
+
         private void AccSettings_Click(object sender, RoutedEventArgs e)
         {
             WelcomeLabel.Content = "Настройки аккаунта";
@@ -45,6 +44,7 @@ namespace VacationPlus.Windows.AdminWindow
             else
                 return;
         }
+
         private void Lists_Click(object sender, RoutedEventArgs e)
         {
             WelcomeLabel.Content = "Списки и контроль данных";
@@ -65,6 +65,7 @@ namespace VacationPlus.Windows.AdminWindow
             WelcomeLabel.Content = "Сообщения/Запросы";
             MainFrame.Source = new Uri("Pages/RequestsMessagesPage.xaml", UriKind.RelativeOrAbsolute);
         }
+
         static public async void SetSettingLabel(string text)
         {
             System.Media.SystemSounds.Beep.Play();

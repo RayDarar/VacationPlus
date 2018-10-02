@@ -12,6 +12,7 @@ namespace VP.BAL.Classes
         public static Vacations Vacation = null;
         public static Messages Message = null;
         public static Requests Request = null;
+
         public static void ResetAllData()
         {
             Admin = null;
